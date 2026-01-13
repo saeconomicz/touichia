@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Touichia — T-Shirt Prints</title>
+  <meta name="description" content="Touichia — limited-run Moroccan-inspired t-shirt prints. Order on WhatsApp. Drops, designs, and delivery across Morocco." />
+  <style>
+    :root{
+      --bg:#0b0b0f;
+      --panel:#12121a;
+      --panel2:#171722;
+      --text:#f3f4f6;
+      --muted:#b7bcc7;
+      --line:rgba(255,255,255,.10);
+      --accent:#19c37d;  /* WhatsApp-ish green */
+      --accent2:#f5c542; /* warm highlight */
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius:18px;
+      --max:1120px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 700px at 20% -10%, rgba(245,197,66,.16), transparent 60%),
+                  radial-gradient(900px 600px at 90% 0%, rgba(25,195,125,.14), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      line-height:1.45;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:18px}
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:12px 14px;
+      background: rgba(18,18,26,.65);
+      border:1px solid var(--line);
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      position: sticky; top: 12px; z-index: 20;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight: 800; letter-spacing:.2px;
+    }
+    .logo{
+      width:34px; height:34px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(25,195,125,.95), rgba(245,197,66,.95));
+      box-shadow: 0 10px 20px rgba(0,0,0,.35);
+      position:relative;
+    }
+    .logo:after{
+      content:""; position:absolute; inset:9px;
+      border-radius:10px;
+      border:1px solid rgba(0,0,0,.25);
+      background: rgba(255,255,255,.18);
+    }
+    .navlinks{display:flex; gap:14px; align-items:center}
+    .navlinks a{
+      padding:10px 12px;
+      border-radius: 999px;
+      color: var(--muted);
+      border: 1px solid transparent;
+    }
+    .navlinks a:hover{
+      color: var(--text);
+      border-color: var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .cta{
+      display:flex; gap:10px; align-items:center;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:11px 14px;
+      border-radius: 999px;
+      font-weight:700;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 10px 24px rgba(0,0,0,.25);
+      cursor:pointer;
+      user-select:none;
+    }
+    .btn:hover{background: rgba(255,255,255,.07)}
+    .btn.primary{
+      border-color: rgba(25,195,125,.45);
+      background: linear-gradient(180deg, rgba(25,195,125,.20), rgba(25,195,125,.10));
+    }
+    .pill{
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      border:1px solid var(--line);
+      color: var(--muted);
+      background: rgba(255,255,255,.03);
+    }
+
+    /* HERO */
+    .hero{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:16px;
+      align-items:stretch;
+    }
+    .card{
+      background: rgba(18,18,26,.72);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .hero-left{padding:22px}
+    .kicker{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      margin-bottom:12px;
+    }
+    h1{
+      margin:0 0 10px 0;
+      font-size: clamp(28px, 4.2vw, 48px);
+      line-height:1.05;
+      letter-spacing:-.8px;
+    }
+    .sub{
+      margin:0 0 18px 0;
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 56ch;
+    }
+    .hero-actions{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      margin-top:14px;
+    }
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:10px;
+      margin-top:18px;
+    }
+    .stat{
+      padding:12px;
+      background: rgba(255,255,255,.03);
+      border:1px solid var(--line);
+      border-radius: 14px;
+    }
+    .stat b{display:block; font-size:16px}
+    .stat span{color:var(--muted); font-size:12px}
+
+    /* HERO RIGHT: mock product */
+    .hero-right{
+      position:relative;
+      padding:0;
+    }
+    .mock{
+      height:100%;
+      min-height: 320px;
+      display:grid;
+      grid-template-rows: auto 1fr auto;
+      background:
+        radial-gradient(900px 360px at 40% 0%, rgba(245,197,66,.14), transparent 55%),
+        radial-gradient(900px 360px at 70% 20%, rgba(25,195,125,.14), transparent 55%),
+        rgba(23,23,34,.75);
+    }
+    .mock-top{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 16px 0 16px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .shirt{
+      display:grid;
+      place-items:center;
+      padding: 10px 16px 16px 16px;
+    }
+    .tee{
+      width: min(320px, 100%);
+      aspect-ratio: 4 / 5;
+      border-radius: 20px;
+      background: linear-gradient(180deg, #f7f7fb, #dedee8);
+      border: 1px solid rgba(0,0,0,.08);
+      box-shadow: 0 24px 60px rgba(0,0,0,.35);
+      position:relative;
+      overflow:hidden;
+    }
+    .tee:before{
+      content:""; position:absolute; inset:-40% -20%;
+      background: radial-gradient(circle at 30% 30%, rgba(25,195,125,.22), transparent 55%),
+                  radial-gradient(circle at 70% 60%, rgba(245,197,66,.20), transparent 55%);
+      transform: rotate(12deg);
+    }
+    .print{
+      position:absolute;
+      left:50%; top:44%;
+      transform: translate(-50%,-50%);
+      width: 52%;
+      aspect-ratio: 1 / 1;
+      border-radius: 18px;
+      background: rgba(11,11,15,.90);
+      color: #fff;
+      display:grid;
+      place-items:center;
+      font-weight:800;
+      letter-spacing:.5px;
+      box-shadow: 0 14px 24px rgba(0,0,0,.28);
+      border: 1px solid rgba(255,255,255,.12);
+      padding:10px;
+      text-align:center;
+    }
+    .print small{
+      display:block;
+      font-weight:600;
+      opacity:.75;
+      letter-spacing:.2px;
+      margin-top:6px;
+      font-size:11px;
+    }
+    .mock-bottom{
+      display:flex; gap:10px; flex-wrap:wrap;
+      padding: 0 16px 16px 16px;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .selector{
+      display:flex; gap:8px; align-items:center;
+    }
+    .chip{
+      padding:8px 10px;
+      border-radius: 999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      font-size: 12px;
+      cursor:pointer;
+    }
+    .chip[aria-pressed="true"]{
+      color: var(--text);
+      border-color: rgba(245,197,66,.35);
+      background: rgba(245,197,66,.08);
+    }
+
+    /* SECTIONS */
+    .grid2{
+      margin-top:16px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:16px;
+    }
+    .section{
+      padding:18px;
+    }
+    .section h2{
+      margin:0 0 8px 0;
+      font-size: 20px;
+      letter-spacing:-.3px;
+    }
+    .section p{
+      margin:0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* CATALOG */
+    .catalog{
+      margin-top:16px;
+      padding:18px;
+    }
+    .catalog-top{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      margin-bottom:12px;
+    }
+    .filters{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+    }
+    .input{
+      padding:11px 12px;
+      border-radius: 12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      min-width: 220px;
+      outline:none;
+    }
+    .input::placeholder{color: rgba(183,188,199,.65)}
+    .products{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    .product{
+      border-radius: 18px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      overflow:hidden;
+      display:grid;
+      grid-template-rows: 180px auto;
+    }
+    .thumb{
+      position:relative;
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.02));
+      display:grid;
+      place-items:center;
+    }
+    .thumb .mini{
+      width: 88%;
+      aspect-ratio: 4 / 5;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #f7f7fb, #dedee8);
+      border: 1px solid rgba(0,0,0,.08);
+      position:relative;
+      overflow:hidden;
+    }
+    .thumb .mini:before{
+      content:""; position:absolute; inset:-40% -20%;
+      background: radial-gradient(circle at 30% 30%, rgba(25,195,125,.18), transparent 55%),
+                  radial-gradient(circle at 70% 60%, rgba(245,197,66,.16), transparent 55%);
+      transform: rotate(10deg);
+    }
+    .thumb .mini .badge{
+      position:absolute; left:50%; top:44%;
+      transform: translate(-50%,-50%);
+      width: 58%;
+      aspect-ratio: 1/1;
+      border-radius: 16px;
+      background: rgba(11,11,15,.90);
+      color:#fff;
+      display:grid;
+      place-items:center;
+      border: 1px solid rgba(255,255,255,.12);
+      font-weight:800;
+      text-align:center;
+      padding:8px;
+      font-size:13px;
+    }
+    .prod-body{padding:12px}
+    .prod-title{margin:0; font-weight:800}
+    .prod-meta{
+      margin:6px 0 10px 0;
+      color: var(--muted);
+      font-size: 13px;
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .price{
+      font-weight:900;
+      letter-spacing:.2px;
+    }
+    .prod-actions{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top: 10px;
+    }
+    .btn.small{padding:10px 12px; font-size: 13px; box-shadow:none}
+
+    /* FOOTER */
+    footer{
+      margin:16px 0 28px 0;
+      color: var(--muted);
+      font-size: 13px;
+      text-align:center;
+    }
+    .fine{
+      opacity:.9;
+      max-width: 80ch;
+      margin: 0 auto;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 920px){
+      .hero{grid-template-columns:1fr}
+      .products{grid-template-columns: repeat(2, 1fr)}
+      .grid2{grid-template-columns:1fr}
+      .navlinks{display:none}
+    }
+    @media (max-width: 520px){
+      .wrap{padding:14px}
+      .stats{grid-template-columns:1fr}
+      .products{grid-template-columns:1fr}
+      .input{min-width: 0; width: 100%}
+      .catalog-top{align-items:stretch}
+      .cta{gap:8px}
+      .btn{padding:10px 12px}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- NAV -->
+    <header class="nav" role="navigation" aria-label="Touichia navigation">
+      <a class="brand" href="#top" aria-label="Touichia home">
+        <span class="logo" aria-hidden="true"></span>
+        <span>Touichia</span>
+        <span class="pill">Limited drop</span>
+      </a>
+
+      <nav class="navlinks" aria-label="Sections">
+        <a href="#catalog">Designs</a>
+        <a href="#how">How it works</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <div class="cta">
+        <a class="btn primary" id="whatsAppTop" href="#" role="button" aria-label="Order on WhatsApp">
+          <!-- simple icon -->
+          <span aria-hidden="true">💬</span>
+          <span>Order on WhatsApp</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <main id="top" class="hero" aria-label="Landing">
+      <section class="card hero-left">
+        <div class="kicker">
+          <span class="pill">Casablanca made</span>
+          <span class="pill">Cotton tees</span>
+          <span class="pill">Fast delivery</span>
+        </div>
+        <h1>Wear a print that hits.<br/>Small drop. Big vibe.</h1>
+        <p class="sub">
+          Touichia sells limited-run white cotton T-shirts with bold, clean prints.
+          See designs on TikTok, order via WhatsApp, and get delivery anywhere in Morocco.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn primary" id="whatsAppHero" href="#">
+            <span aria-hidden="true">✅</span>
+            <span>Order now (WhatsApp)</span>
+          </a>
+          <a class="btn" href="#catalog">
+            <span aria-hidden="true">👕</span>
+            <span>View designs</span>
+          </a>
+        </div>
+
+        <div class="stats" aria-label="Highlights">
+          <div class="stat">
+            <b>20 pcs / drop</b>
+            <span>Scarcity that sells</span>
+          </div>
+          <div class="stat">
+            <b>COD available</b>
+            <span>Pay on delivery</span>
+          </div>
+          <div class="stat">
+            <b>24–72h</b>
+            <span>Typical delivery time</span>
+          </div>
+        </div>
+      </section>
+
+      <aside class="card hero-right" aria-label="Featured design preview">
+        <div class="mock">
+          <div class="mock-top">
+            <span>Featured print</span>
+            <span class="pill" id="featuredTag">NEW</span>
+          </div>
+
+          <div class="shirt">
+            <div class="tee" aria-label="T-shirt mockup">
+              <div class="print" id="featuredPrint">
+                ATLAS WAVE
+                <small>clean • bold • minimal</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="mock-bottom">
+            <div class="selector" aria-label="Featured design selector">
+              <button class="chip" aria-pressed="true" data-feature="ATLAS WAVE">Atlas</button>
+              <button class="chip" aria-pressed="false" data-feature="MINT ZELLIGE">Zellige</button>
+              <button class="chip" aria-pressed="false" data-feature="CASA HUMOR">Casa</button>
+            </div>
+
+            <a class="btn small primary" id="whatsAppFeatured" href="#">
+              <span aria-hidden="true">🟢</span>
+              <span>Order this design</span>
+            </a>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <!-- INFO STRIP -->
+    <section class="grid2" aria-label="Value propositions">
+      <div class="card section" id="how">
+        <h2>How ordering works</h2>
+        <p>
+          1) Pick a design → 2) Tap WhatsApp → 3) Send size + city → 4) Confirm address → 5) Delivery.
+        </p>
+      </div>
+
+      <div class="card section">
+        <h2>Made for TikTok selling</h2>
+        <p>
+          Each design comes with a short description you can paste in comments and a ready WhatsApp order message.
+        </p>
+      </div>
+    </section>
+
+    <!-- CATALOG -->
+    <section class="card catalog" id="catalog" aria-label="Design catalog">
+      <div class="catalog-top">
+        <div>
+          <h2 style="margin:0 0 6px 0;">Designs</h2>
+          <p style="margin:0; color:var(--muted); font-size:14px;">Tap a design to order. Replace these placeholders with your real artwork later.</p>
+        </div>
+
+        <div class="filters">
+          <input class="input" id="search" placeholder="Search designs (e.g., zellige, casa...)" />
+          <button class="btn small" id="toggleGrid" type="button">Toggle compact view</button>
+        </div>
+      </div>
+
+      <div class="products" id="products"></div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="card section" id="faq" style="margin-top:16px;">
+      <h2>FAQ</h2>
+      <p style="margin-top:8px;">
+        <b>Payment?</b> Cash on delivery (COD) or bank transfer (optional).<br/>
+        <b>Sizes?</b> S–XL depending on stock. For first drops, keep it simple (M/L).<br/>
+        <b>Delivery time?</b> Usually 24–72h depending on city and courier.<br/>
+        <b>Returns?</b> If print is damaged on arrival, we replace (photo proof).
+      </p>
+    </section>
+
+    <footer>
+      <p class="fine">
+        © <span id="year"></span> Touichia. Built for small drops in Casablanca.  
+        <span style="display:block; margin-top:6px;">Tip: edit the WhatsApp number + price in the script at the bottom.</span>
+      </p>
+    </footer>
+  </div>
+
+  <script>
+    // =========================
+    // CONFIG — change these
+    // =========================
+    const BRAND = "Touichia";
+    const WHATSAPP_NUMBER_INTERNATIONAL = "212600000000"; // <-- replace with your number (Morocco: 212 + number without leading 0)
+    const DEFAULT_PRICE_MAD = 139;
+    const DEFAULT_CITY = "Casablanca";
+
+    // Products (placeholder designs — replace names/descriptions/prices)
+    const PRODUCTS = [
+      { id:"atlas-wave", name:"ATLAS WAVE", tag:"NEW", style:"Minimal", price: DEFAULT_PRICE_MAD, desc:"Bold minimal block print. Clean look on white cotton." },
+      { id:"mint-zellige", name:"MINT ZELLIGE", tag:"BEST", style:"Geometry", price: DEFAULT_PRICE_MAD, desc:"Geometric Moroccan tile vibe, modern and crisp." },
+      { id:"casa-humor", name:"CASA HUMOR", tag:"FUN", style:"Humor", price: DEFAULT_PRICE_MAD, desc:"A clean funny print made for TikTok comments & shares." },
+      { id:"sahara-line", name:"SAHARA LINE", tag:"DROP", style:"Abstract", price: DEFAULT_PRICE_MAD, desc:"Abstract desert linework. Simple, wearable, aesthetic." },
+      { id:"lion-motif", name:"LION MOTIF", tag:"HOT", style:"Iconic", price: DEFAULT_PRICE_MAD + 10, desc:"Iconic strong symbol print. Great for statement fits." },
+      { id:"harira-club", name:"HARIRA CLUB", tag:"LOCAL", style:"Food", price: DEFAULT_PRICE_MAD, desc:"A playful local-culture print that people instantly get." },
+    ];
+
+    // =========================
+    // Helpers
+    // =========================
+    const el = (sel, parent=document) => parent.querySelector(sel);
+    const els = (sel, parent=document) => [...parent.querySelectorAll(sel)];
+
+    function makeWhatsAppLink({design, price, city}) {
+      const msg =
+`Salam! I want to order from ${BRAND} ✅
+Design: ${design}
+Size: (S/M/L/XL)
+Color: White
+City: ${city || DEFAULT_CITY}
+Quantity: 1
+Price: ${price} MAD
+Name:
+Address:
+Phone:`;
+      const encoded = encodeURIComponent(msg);
+      return `https://wa.me/${WHATSAPP_NUMBER_INTERNATIONAL}?text=${encoded}`;
+    }
+
+    function renderProducts(list) {
+      const grid = el("#products");
+      grid.innerHTML = "";
+
+      list.forEach(p => {
+        const card = document.createElement("article");
+        card.className = "product";
+        card.setAttribute("data-name", p.name.toLowerCase());
+        card.setAttribute("data-style", p.style.toLowerCase());
+        card.innerHTML = `
+          <div class="thumb">
+            <div class="mini" aria-label="T-shirt mockup for ${p.name}">
+              <div class="badge">${p.name}</div>
+            </div>
+          </div>
+          <div class="prod-body">
+            <p class="prod-title">${p.name}</p>
+            <div class="prod-meta">
+              <span class="pill">${p.tag}</span>
+              <span class="pill">${p.style}</span>
+              <span class="pill price">${p.price} MAD</span>
+            </div>
+            <p style="margin:0; color:var(--muted); font-size:13px;">${p.desc}</p>
+            <div class="prod-actions">
+              <a class="btn small primary" href="${makeWhatsAppLink({design:p.name, price:p.price})}" target="_blank" rel="noopener">
+                💬 Order on WhatsApp
+              </a>
+              <button class="btn small" type="button" data-feature="${p.name}">
+                ⭐ Set as featured
+              </button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      // Hook "Set as featured" buttons
+      els('button[data-feature]').forEach(btn => {
+        btn.addEventListener("click", () => setFeatured(btn.getAttribute("data-feature")));
+      });
+    }
+
+    function setFeatured(name) {
+      el("#featuredPrint").innerHTML = `${name}<small>clean • bold • minimal</small>`;
+      el("#whatsAppFeatured").href = makeWhatsAppLink({design:name, price: DEFAULT_PRICE_MAD});
+      // Update chips state if exists
+      els(".chip").forEach(ch => ch.setAttribute("aria-pressed", String(ch.dataset.feature === name)));
+    }
+
+    function wireTopWhatsApp() {
+      const top = el("#whatsAppTop");
+      const hero = el("#whatsAppHero");
+      const featured = el("#whatsAppFeatured");
+
+      // Default message if they just tap "Order"
+      const defaultLink = makeWhatsAppLink({design:"(Tell me your design)", price: DEFAULT_PRICE_MAD});
+
+      top.href = defaultLink;
+      hero.href = defaultLink;
+      featured.href = makeWhatsAppLink({design: el("#featuredPrint").textContent.trim().split("\n")[0], price: DEFAULT_PRICE_MAD});
+    }
+
+    // =========================
+    // Init
+    // =========================
+    el("#year").textContent = new Date().getFullYear();
+
+    wireTopWhatsApp();
+    renderProducts(PRODUCTS);
+
+    // Featured selector chips
+    els(".chip").forEach(chip => {
+      chip.addEventListener("click", () => setFeatured(chip.dataset.feature));
+    });
+
+    // Search
+    el("#search").addEventListener("input", (e) => {
+      const q = e.target.value.trim().toLowerCase();
+      const filtered = PRODUCTS.filter(p =>
+        p.name.toLowerCase().includes(q) ||
+        p.style.toLowerCase().includes(q) ||
+        p.tag.toLowerCase().includes(q) ||
+        p.desc.toLowerCase().includes(q)
+      );
+      renderProducts(filtered);
+    });
+
+    // Compact toggle
+    let compact = false;
+    el("#toggleGrid").addEventListener("click", () => {
+      compact = !compact;
+      const grid = el("#products");
+      grid.style.gridTemplateColumns = compact
+        ? "repeat(2, 1fr)"
+        : "";
+      // On desktop compact = 4 columns; on mobile it stays 1 column anyway
+      if (window.matchMedia("(min-width: 921px)").matches) {
+        grid.style.gridTemplateColumns = compact ? "repeat(4, 1fr)" : "repeat(3, 1fr)";
+      }
+    });
+  </script>
+</body>
+</html>
