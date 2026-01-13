@@ -743,12 +743,16 @@
 
     /* REVEAL */
     [data-reveal]{
+      opacity:1;
+      transform: none;
+    }
+    .js [data-reveal]{
       opacity:0;
       transform: translateY(16px) scale(.98);
       transition: opacity .6s ease, transform .6s ease;
       transition-delay: var(--reveal-delay, 0s);
     }
-    [data-reveal].is-visible{
+    .js [data-reveal].is-visible{
       opacity:1;
       transform: none;
     }
@@ -1035,6 +1039,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js"></script>
 
   <script>
+    document.documentElement.classList.add("js");
+
     // =========================
     // Configuration Firebase
     // =========================
@@ -1049,9 +1055,26 @@
       measurementId: "G-YRMGEH8FNV"
     };
 
-    // Initialiser Firebase
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
+    let db = null;
+    const firebaseReady = initFirebase();
+
+    function initFirebase() {
+      if (!window.firebase || !firebase.initializeApp) {
+        console.warn("Firebase non chargé.");
+        return false;
+      }
+
+      try {
+        const app = firebase.apps && firebase.apps.length
+          ? firebase.app()
+          : firebase.initializeApp(firebaseConfig);
+        db = firebase.database(app);
+        return true;
+      } catch (error) {
+        console.warn("Firebase indisponible.", error);
+        return false;
+      }
+    }
     // =========================
     // CONFIG — modifiez ces valeurs
     // =========================
@@ -1247,6 +1270,13 @@ Téléphone:`;
       });
 
       UPCOMING.forEach(design => {
+        const notesList = el(`#notes-${design.id}`);
+        if (notesList) {
+          notesList.innerHTML = `<p class="note-empty">Chargement des notes...</p>`;
+        }
+      });
+
+      UPCOMING.forEach(design => {
         const voteBtn = el(`#voteBtn-${design.id}`);
         if (voteBtn) {
           voteBtn.addEventListener("click", () => addUpcomingVote(design.id));
@@ -1267,11 +1297,25 @@ Téléphone:`;
         }
       });
 
-      listenToUpcomingVotes();
-      UPCOMING.forEach(design => listenToDesignNotes(design.id));
+      if (firebaseReady) {
+        listenToUpcomingVotes();
+        UPCOMING.forEach(design => listenToDesignNotes(design.id));
+      } else {
+        UPCOMING.forEach(design => {
+          const notesList = el(`#notes-${design.id}`);
+          if (notesList) {
+            notesList.innerHTML = `<p class="note-empty">Connexion aux notes indisponible pour le moment.</p>`;
+          }
+          const voteBtn = el(`#voteBtn-${design.id}`);
+          const submitBtn = el(`#noteSubmit-${design.id}`);
+          if (voteBtn) voteBtn.disabled = true;
+          if (submitBtn) submitBtn.disabled = true;
+        });
+      }
     }
 
     function listenToUpcomingVotes() {
+      if (!firebaseReady || !db) return;
       db.ref("votes").on("value", (snapshot) => {
         const votes = snapshot.val() || {};
         UPCOMING.forEach(design => {
@@ -1283,12 +1327,17 @@ Téléphone:`;
     }
 
     function addUpcomingVote(designId) {
+      if (!firebaseReady || !db) {
+        alert("Votes indisponibles pour le moment.");
+        return;
+      }
       db.ref(`votes/${designId}`).transaction((current) => {
         return (current || 0) + 1;
       });
     }
 
     function listenToDesignNotes(designId) {
+      if (!firebaseReady || !db) return;
       db.ref("notes").orderByChild("designId").equalTo(designId).limitToLast(30).on("value", (snapshot) => {
         const notesList = el(`#notes-${designId}`);
         if (!notesList) return;
@@ -1313,6 +1362,10 @@ Téléphone:`;
     }
 
     function submitDesignNote(designId) {
+      if (!firebaseReady || !db) {
+        alert("Notes indisponibles pour le moment.");
+        return;
+      }
       const usernameEl = el(`#noteUsername-${designId}`);
       const textEl = el(`#noteText-${designId}`);
       const username = usernameEl ? usernameEl.value.trim() : "";
