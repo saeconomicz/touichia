@@ -199,7 +199,8 @@
     .hero{
       margin-top:18px;
       display:grid;
-      grid-template-columns: 1.15fr .85fr;
+      grid-template-columns: 1fr;
+      justify-items:center;
       gap:16px;
       align-items:stretch;
       position: relative;
@@ -289,6 +290,7 @@
     .hero-right{
       position:relative;
       padding:0;
+      width: min(520px, 100%);
     }
     .mock{
       height:100%;
@@ -322,6 +324,12 @@
       box-shadow: 0 24px 60px rgba(0,0,0,.35);
       position:relative;
       overflow:hidden;
+    }
+    .tee-img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
     }
     .tee:before{
       content:""; position:absolute; inset:-40% -20%;
@@ -367,6 +375,20 @@
       color: var(--muted);
       font-size: 13px;
       line-height: 1.6;
+    }
+    .current-name{
+      margin: 8px 16px 0 16px;
+      font-weight:800;
+      font-size:16px;
+      color: var(--moroccan-gold);
+      letter-spacing:.2px;
+    }
+    .current-tagline{
+      margin: 4px 16px 0 16px;
+      font-size:12px;
+      color: var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.35px;
     }
     .current-meta{
       display:flex;
@@ -648,6 +670,8 @@
     }
     .btn.small{padding:10px 12px; font-size: 13px; box-shadow:none}
 
+    .mobile-cta{display:none}
+
     /* UPCOMING */
     .upcoming-grid{
       display:grid;
@@ -662,6 +686,20 @@
       display:flex;
       flex-direction:column;
       gap:12px;
+    }
+    .upcoming-thumb{
+      width:100%;
+      aspect-ratio: 4 / 5;
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+    }
+    .upcoming-thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
     }
     .upcoming-top{
       display:flex;
@@ -782,6 +820,22 @@
       .upcoming-grid{grid-template-columns: repeat(2, 1fr)}
       .navlinks{display:none}
     }
+    @media (max-width: 680px){
+      body{padding-bottom:96px}
+      .nav{
+        flex-wrap:wrap;
+        gap:10px;
+        padding:12px 12px;
+      }
+      .brand{flex:1 0 auto}
+      .cta{width:100%}
+      .cta .btn{width:100%; justify-content:center}
+      .ticker{margin-top:10px}
+      .ticker-track{padding:8px 12px}
+      .hero-left{padding:18px}
+      .mock-bottom{flex-direction:column; align-items:flex-start}
+      .current-meta{width:100%; justify-content:space-between}
+    }
     @media (max-width: 520px){
       .wrap{padding:14px}
       .stats{grid-template-columns:1fr}
@@ -795,6 +849,24 @@
       .cta{gap:8px}
       .btn{padding:10px 12px}
       h1{font-size: clamp(24px, 3vw, 36px)}
+    }
+    @media (max-width: 680px){
+      .mobile-cta{
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        z-index: 50;
+      }
+      .mobile-cta .btn{
+        width:100%;
+        padding:14px 16px;
+        font-size:14px;
+        box-shadow: 0 18px 40px rgba(0,0,0,.35);
+      }
+    }
+    @media (min-width: 681px){
+      .mobile-cta{display:none}
     }
     @media (prefers-reduced-motion: reduce){
       html{scroll-behavior:auto}
@@ -815,8 +887,7 @@
       </a>
 
       <nav class="navlinks" aria-label="Sections">
-        <a href="#catalog">Modèles</a>
-        <a href="#upcoming">À venir</a>
+        <a href="#edition">Prochaine édition</a>
         <a href="#how">Comment ça marche</a>
         <a href="#faq">FAQ</a>
       </nav>
@@ -849,45 +920,6 @@
 
     <!-- HERO -->
     <main id="top" class="hero" aria-label="Accueil">
-      <section class="card hero-left" data-reveal>
-        <div class="kicker">
-          <span class="pill">Fait à Casablanca</span>
-          <span class="pill">T-shirts en coton</span>
-          <span class="pill">Livraison rapide</span>
-        </div>
-        <h1>Portez une impression qui cartonne.<br/>Petite édition. Grande ambiance.</h1>
-        <p class="sub">
-          Touichia vend des t-shirts blancs en coton avec des impressions audacieuses et épurées en édition limitée.
-          Découvrez les modèles sur TikTok, commandez via WhatsApp et recevez votre livraison partout au Maroc.
-        </p>
-
-        <div class="hero-actions">
-          <a class="btn primary" id="whatsAppHero" href="#">
-            <span aria-hidden="true">✅</span>
-            <span>Commander maintenant (WhatsApp)</span>
-          </a>
-          <a class="btn" href="#catalog">
-            <span aria-hidden="true">👕</span>
-            <span>Voir les modèles</span>
-          </a>
-        </div>
-
-        <div class="stats" aria-label="Points forts">
-          <div class="stat">
-            <b>20 pièces / édition</b>
-            <span>La rareté qui se vend</span>
-          </div>
-          <div class="stat">
-            <b>Paiement à la livraison</b>
-            <span>Payez à la réception</span>
-          </div>
-          <div class="stat">
-            <b>24–72h</b>
-            <span>Délai de livraison typique</span>
-          </div>
-        </div>
-      </section>
-
       <aside class="card hero-right" aria-label="Modèle en vente" data-reveal style="--reveal-delay:.08s;">
         <div class="mock">
           <div class="mock-top">
@@ -897,13 +929,12 @@
 
           <div class="shirt">
             <div class="tee" aria-label="Maquette de t-shirt">
-              <div class="print" id="currentPrint">
-                ATLAS WAVE
-                <small>sobre • audacieux • minimaliste</small>
-              </div>
+              <img class="tee-img" id="currentImage" src="images/Modele1.png" alt="Modèle en vente Touichia" />
             </div>
           </div>
 
+          <p class="current-name" id="currentName">ATLAS WAVE</p>
+          <p class="current-tagline" id="currentTagline">minimaliste • édition limitée • coton blanc</p>
           <p class="current-desc" id="currentDesc">Modèle du moment, impression centrale nette et coton blanc premium.</p>
 
           <div class="mock-bottom">
@@ -921,6 +952,18 @@
       </aside>
     </main>
 
+    <!-- PROCHAINE EDITION -->
+    <section class="card section" id="edition" style="margin-top:16px;" data-reveal>
+      <div class="section-head">
+        <div>
+          <h2>Prochaine édition</h2>
+          <p>Votez pour les prochains modèles.</p>
+        </div>
+        <span class="pill">Vote ouvert</span>
+      </div>
+      <div class="upcoming-grid" id="upcomingGrid"></div>
+    </section>
+
     <!-- INFO STRIP -->
     <section class="grid2" aria-label="Propositions de valeur">
       <div class="card section" id="how" data-reveal>
@@ -936,84 +979,6 @@
           Chaque modèle est accompagné d'une courte description que vous pouvez coller dans les commentaires et d'un message de commande WhatsApp prêt.
         </p>
       </div>
-    </section>
-
-    <!-- MOODBOARD -->
-    <section class="card section moodboard" id="mood" aria-label="Ambiances">
-      <div class="section-head" data-reveal>
-        <div>
-          <h2>Ambiances de l'édition</h2>
-          <p>Trois univers visuels pour mélanger minimalisme, géométrie marocaine et humour local — parfaits pour TikTok.</p>
-        </div>
-        <span class="pill">Nouveau</span>
-      </div>
-
-      <div class="mood-grid">
-        <article class="mood" data-reveal style="--reveal-delay:.06s;">
-          <div class="mood-visual mood-1" aria-hidden="true"></div>
-          <div class="mood-body">
-            <h3>Atlas minimaliste</h3>
-            <p>Contours nets, contrastes chauds et impression centrale propre.</p>
-            <div class="mood-tags">
-              <span class="mood-tag">Lignes nettes</span>
-              <span class="mood-tag">Édition limitée</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="mood" data-reveal style="--reveal-delay:.12s;">
-          <div class="mood-visual mood-2" aria-hidden="true"></div>
-          <div class="mood-body">
-            <h3>Zellige menthe</h3>
-            <p>Géométrie moderne, détails fins, ambiance méditerranéenne.</p>
-            <div class="mood-tags">
-              <span class="mood-tag">Géométrie</span>
-              <span class="mood-tag">Coton blanc</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="mood" data-reveal style="--reveal-delay:.18s;">
-          <div class="mood-visual mood-3" aria-hidden="true"></div>
-          <div class="mood-body">
-            <h3>Casa humour</h3>
-            <p>Punchlines courtes, clin d'œil local, partage facile.</p>
-            <div class="mood-tags">
-              <span class="mood-tag">Humour local</span>
-              <span class="mood-tag">Partage</span>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- CATALOG -->
-    <section class="card catalog" id="catalog" aria-label="Catalogue des modèles" data-reveal>
-      <div class="catalog-top">
-        <div>
-          <h2 style="margin:0 0 6px 0;">Modèles</h2>
-          <p style="margin:0; color:var(--muted); font-size:14px;">Appuyez sur un modèle pour commander. Remplacez ces exemples par vos vrais visuels plus tard.</p>
-        </div>
-
-        <div class="filters">
-          <input class="input" id="search" placeholder="Rechercher des modèles (ex: zellige, casa...)" />
-          <button class="btn small" id="toggleGrid" type="button">Vue compacte</button>
-        </div>
-      </div>
-
-      <div class="products" id="products"></div>
-    </section>
-
-    <!-- UPCOMING SECTION -->
-    <section class="card section" id="upcoming" style="margin-top:16px;" data-reveal>
-      <div class="section-head">
-        <div>
-          <h2>Prochaines éditions</h2>
-          <p>Votez pour les trois prochains modèles et laissez une note pour guider la prochaine édition.</p>
-        </div>
-        <span class="pill">Vote ouvert</span>
-      </div>
-      <div class="upcoming-grid" id="upcomingGrid"></div>
     </section>
 
     <!-- FAQ -->
@@ -1033,6 +998,13 @@
         <span style="display:block; margin-top:6px;">Conseil: modifiez le numéro WhatsApp + le prix dans le script en bas.</span>
       </p>
     </footer>
+  </div>
+
+  <div class="mobile-cta" aria-label="Commande rapide">
+    <a class="btn primary" id="whatsAppMobile" href="#">
+      <span aria-hidden="true">🟢</span>
+      <span>Commander sur WhatsApp</span>
+    </a>
   </div>
 
   <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js"></script>
@@ -1083,16 +1055,6 @@
     const DEFAULT_PRICE_MAD = 139;
     const DEFAULT_CITY = "Casablanca";
 
-    // Produits (modèles d'exemple — remplacez les noms/descriptions/prix)
-    const PRODUCTS = [
-      { id:"atlas-wave", name:"ATLAS WAVE", tag:"NOUVEAU", style:"Minimaliste", price: DEFAULT_PRICE_MAD, desc:"Impression de bloc minimaliste audacieuse. Rendu épuré sur coton blanc." },
-      { id:"mint-zellige", name:"MINT ZELLIGE", tag:"MEILLEUR", style:"Géométrie", price: DEFAULT_PRICE_MAD, desc:"Inspiration géométrique de carreaux marocains, moderne et épurée." },
-      { id:"casa-humor", name:"CASA HUMOR", tag:"AMUSANT", style:"Humour", price: DEFAULT_PRICE_MAD, desc:"Une impression drôle et épurée faite pour les commentaires TikTok et les partages." },
-      { id:"sahara-line", name:"SAHARA LINE", tag:"ÉDITION", style:"Abstrait", price: DEFAULT_PRICE_MAD, desc:"Linéarité abstraite du désert. Simple, facile à porter, esthétique." },
-      { id:"lion-motif", name:"LION MOTIF", tag:"CHAUD", style:"Iconique", price: DEFAULT_PRICE_MAD + 10, desc:"Impression d'un symbole fort et iconique. Parfait pour des tenues affirmées." },
-      { id:"harira-club", name:"HARIRA CLUB", tag:"LOCAL", style:"Nourriture", price: DEFAULT_PRICE_MAD, desc:"Une impression ludique de culture locale que les gens comprennent immédiatement." },
-    ];
-
     const CURRENT_DESIGN = {
       id: "atlas-wave",
       name: "ATLAS WAVE",
@@ -1100,13 +1062,14 @@
       style: "Minimaliste",
       price: DEFAULT_PRICE_MAD,
       desc: "Modèle du moment, impression centrale nette et coton blanc premium.",
-      tagline: "minimaliste • édition limitée • coton blanc"
+      tagline: "minimaliste • édition limitée • coton blanc",
+      image: "images/Modele1.png"
     };
 
     const UPCOMING = [
-      { id:"sirocco-line", name:"SIROCCO LINE", tag:"À venir", style:"Linéaire", desc:"Lignes fines inspirées du désert, ultra épuré." },
-      { id:"zellige-azur", name:"ZELLIGE AZUR", tag:"À venir", style:"Géométrie", desc:"Motifs zellige revisités, bleu profond et or doux." },
-      { id:"casa-punch", name:"CASA PUNCH", tag:"À venir", style:"Humour", desc:"Punchline courte et locale, parfaite pour TikTok." },
+      { id:"prochain-modele-1", name:"Prochain modèle 1", tag:"À venir", style:"À venir", desc:"Première option pour la prochaine édition.", image:"images/ProchainModele1.png" },
+      { id:"prochain-modele-2", name:"Prochain modèle 2", tag:"À venir", style:"À venir", desc:"Deuxième option pour la prochaine édition.", image:"images/ProchainModele2.png" },
+      { id:"prochain-modele-3", name:"Prochain modèle 3", tag:"À venir", style:"À venir", desc:"Troisième option pour la prochaine édition.", image:"images/ProchainModele3.png" },
     ];
 
     // =========================
@@ -1131,50 +1094,25 @@ Téléphone:`;
       return `https://wa.me/${WHATSAPP_NUMBER_INTERNATIONAL}?text=${encoded}`;
     }
 
-    function renderProducts(list) {
-      const grid = el("#products");
-      grid.innerHTML = "";
-
-      list.forEach(p => {
-        const card = document.createElement("article");
-        const isCurrent = p.id === CURRENT_DESIGN.id;
-        card.className = `product${isCurrent ? " is-current" : ""}`;
-        card.setAttribute("data-name", p.name.toLowerCase());
-        card.setAttribute("data-style", p.style.toLowerCase());
-        const saleTag = isCurrent ? `<span class="pill">En vente</span>` : "";
-        card.innerHTML = `
-          <div class="thumb">
-            <div class="mini" aria-label="Maquette de t-shirt pour ${p.name}">
-              <div class="badge">${p.name}</div>
-            </div>
-          </div>
-          <div class="prod-body">
-            <p class="prod-title">${p.name}</p>
-            <div class="prod-meta">
-              ${saleTag}
-              <span class="pill">${p.tag}</span>
-              <span class="pill">${p.style}</span>
-              <span class="pill price">${p.price} MAD</span>
-            </div>
-            <p style="margin:0; color:var(--muted); font-size:13px;">${p.desc}</p>
-            <div class="prod-actions">
-              <a class="btn small primary" href="${makeWhatsAppLink({design:p.name, price:p.price})}" target="_blank" rel="noopener">
-                💬 Commander sur WhatsApp
-              </a>
-            </div>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-    }
-
     function renderCurrentDesign() {
-      el("#currentPrint").innerHTML = `${CURRENT_DESIGN.name}<small>${CURRENT_DESIGN.tagline}</small>`;
       el("#currentTag").textContent = CURRENT_DESIGN.tag;
       el("#currentStyle").textContent = CURRENT_DESIGN.style;
       el("#currentPrice").textContent = `${CURRENT_DESIGN.price} MAD`;
       el("#currentDesc").textContent = CURRENT_DESIGN.desc;
-      el("#whatsAppCurrent").href = makeWhatsAppLink({design: CURRENT_DESIGN.name, price: CURRENT_DESIGN.price});
+      el("#currentName").textContent = CURRENT_DESIGN.name;
+      const tagline = el("#currentTagline");
+      if (tagline) tagline.textContent = CURRENT_DESIGN.tagline;
+      const currentImage = el("#currentImage");
+      if (currentImage) {
+        currentImage.src = CURRENT_DESIGN.image;
+        currentImage.alt = `Modèle en vente ${CURRENT_DESIGN.name}`;
+      }
+      const currentLink = makeWhatsAppLink({design: CURRENT_DESIGN.name, price: CURRENT_DESIGN.price});
+      el("#whatsAppCurrent").href = currentLink;
+      const mobileCta = el("#whatsAppMobile");
+      if (mobileCta) {
+        mobileCta.href = currentLink;
+      }
     }
 
     function wireTopWhatsApp() {
@@ -1183,8 +1121,8 @@ Téléphone:`;
 
       const currentLink = makeWhatsAppLink({design: CURRENT_DESIGN.name, price: CURRENT_DESIGN.price});
 
-      top.href = currentLink;
-      hero.href = currentLink;
+      if (top) top.href = currentLink;
+      if (hero) hero.href = currentLink;
     }
 
     // =========================
@@ -1192,36 +1130,9 @@ Téléphone:`;
     // =========================
     el("#year").textContent = new Date().getFullYear();
 
-    renderProducts(PRODUCTS);
     renderCurrentDesign();
     wireTopWhatsApp();
     renderUpcoming();
-
-    // Recherche
-    el("#search").addEventListener("input", (e) => {
-      const q = e.target.value.trim().toLowerCase();
-      const filtered = PRODUCTS.filter(p =>
-        p.name.toLowerCase().includes(q) ||
-        p.style.toLowerCase().includes(q) ||
-        p.tag.toLowerCase().includes(q) ||
-        p.desc.toLowerCase().includes(q)
-      );
-      renderProducts(filtered);
-    });
-
-    // Basculer entre vues compacte et normale
-    let compact = false;
-    el("#toggleGrid").addEventListener("click", () => {
-      compact = !compact;
-      const grid = el("#products");
-      grid.style.gridTemplateColumns = compact
-        ? "repeat(2, 1fr)"
-        : "";
-      // Sur bureau: compacte = 4 colonnes; sur mobile: reste 1 colonne
-      if (window.matchMedia("(min-width: 921px)").matches) {
-        grid.style.gridTemplateColumns = compact ? "repeat(4, 1fr)" : "repeat(3, 1fr)";
-      }
-    });
 
     // =========================
     // PROCHAINES ÉDITIONS: votes + notes
@@ -1238,6 +1149,9 @@ Téléphone:`;
         card.setAttribute("data-reveal", "");
         card.style.setProperty("--reveal-delay", `${0.06 * (index + 1)}s`);
         card.innerHTML = `
+          <div class="upcoming-thumb">
+            <img src="${design.image}" alt="${design.name}" loading="lazy" />
+          </div>
           <div class="upcoming-top">
             <div>
               <h3>${design.name}</h3>
