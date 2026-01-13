@@ -362,6 +362,18 @@
       align-items:center;
       justify-content:space-between;
     }
+    .current-desc{
+      margin: 6px 16px 0 16px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .current-meta{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
     .selector{
       display:flex; gap:8px; align-items:center;
     }
@@ -565,9 +577,19 @@
       background: rgba(212,175,55,.06);
       transform: translateY(-4px);
     }
-    
+
     .product:hover::before {
       opacity: 1;
+    }
+
+    .product.is-current{
+      border-color: rgba(25,195,125,.5);
+      background: rgba(25,195,125,.08);
+      box-shadow: 0 18px 40px rgba(0,0,0,.35);
+    }
+    .product.is-current::before{
+      opacity: 1;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
     }
     
     .thumb{
@@ -626,6 +648,99 @@
     }
     .btn.small{padding:10px 12px; font-size: 13px; box-shadow:none}
 
+    /* UPCOMING */
+    .upcoming-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:16px;
+    }
+    .upcoming-card{
+      border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding:16px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .upcoming-top{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+    }
+    .upcoming-top h3{
+      margin:0;
+      font-size:18px;
+      color: var(--moroccan-gold);
+    }
+    .upcoming-desc{
+      margin:6px 0 0 0;
+      color: var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .upcoming-meta{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .upcoming-vote{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:10px 12px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background: rgba(255,255,255,.02);
+    }
+    .vote-count{
+      font-size:22px;
+      font-weight:800;
+      color: var(--accent);
+    }
+    .vote-label{
+      font-size:11px;
+      color: var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.4px;
+    }
+    .upcoming-notes{
+      border-top:1px dashed var(--line);
+      padding-top:12px;
+    }
+    .upcoming-notes-title{
+      font-size:11px;
+      color: var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.4px;
+      margin-bottom:8px;
+    }
+    .note-form{
+      display:grid;
+      grid-template-columns: 1fr 1fr auto;
+      gap:8px;
+    }
+    .notes-list{
+      max-height:220px;
+      overflow-y:auto;
+      margin-top:10px;
+    }
+    .note-item{
+      padding:8px;
+      background:rgba(255,255,255,.02);
+      border-left:3px solid var(--accent);
+      border-radius:4px;
+      font-size:12px;
+      margin-bottom:8px;
+    }
+    .note-empty{
+      margin:8px 0 0 0;
+      color: var(--muted);
+      font-size:12px;
+    }
+
     /* REVEAL */
     [data-reveal]{
       opacity:0;
@@ -660,6 +775,7 @@
       .products{grid-template-columns: repeat(2, 1fr)}
       .grid2{grid-template-columns:1fr}
       .mood-grid{grid-template-columns: repeat(2, 1fr)}
+      .upcoming-grid{grid-template-columns: repeat(2, 1fr)}
       .navlinks{display:none}
     }
     @media (max-width: 520px){
@@ -667,6 +783,9 @@
       .stats{grid-template-columns:1fr}
       .products{grid-template-columns:1fr}
       .mood-grid{grid-template-columns:1fr}
+      .upcoming-grid{grid-template-columns:1fr}
+      .note-form{grid-template-columns:1fr}
+      .note-form .btn{width:100%}
       .input{min-width: 0; width: 100%}
       .catalog-top{align-items:stretch}
       .cta{gap:8px}
@@ -693,6 +812,7 @@
 
       <nav class="navlinks" aria-label="Sections">
         <a href="#catalog">Modèles</a>
+        <a href="#upcoming">À venir</a>
         <a href="#how">Comment ça marche</a>
         <a href="#faq">FAQ</a>
       </nav>
@@ -764,30 +884,31 @@
         </div>
       </section>
 
-      <aside class="card hero-right" aria-label="Aperçu du modèle en vedette" data-reveal style="--reveal-delay:.08s;">
+      <aside class="card hero-right" aria-label="Modèle en vente" data-reveal style="--reveal-delay:.08s;">
         <div class="mock">
           <div class="mock-top">
-            <span>Modèle en vedette</span>
-            <span class="pill" id="featuredTag">NOUVEAU</span>
+            <span>Modèle en vente</span>
+            <span class="pill" id="currentTag">EN VENTE</span>
           </div>
 
           <div class="shirt">
             <div class="tee" aria-label="Maquette de t-shirt">
-              <div class="print" id="featuredPrint">
+              <div class="print" id="currentPrint">
                 ATLAS WAVE
                 <small>sobre • audacieux • minimaliste</small>
               </div>
             </div>
           </div>
 
+          <p class="current-desc" id="currentDesc">Modèle du moment, impression centrale nette et coton blanc premium.</p>
+
           <div class="mock-bottom">
-            <div class="selector" aria-label="Sélecteur du modèle en vedette">
-              <button class="chip" aria-pressed="true" data-feature="ATLAS WAVE">Atlas</button>
-              <button class="chip" aria-pressed="false" data-feature="MINT ZELLIGE">Zellige</button>
-              <button class="chip" aria-pressed="false" data-feature="CASA HUMOR">Casa</button>
+            <div class="current-meta">
+              <span class="pill" id="currentStyle">Minimaliste</span>
+              <span class="pill price" id="currentPrice">139 MAD</span>
             </div>
 
-            <a class="btn small primary" id="whatsAppFeatured" href="#">
+            <a class="btn small primary" id="whatsAppCurrent" href="#">
               <span aria-hidden="true">🟢</span>
               <span>Commander ce modèle</span>
             </a>
@@ -879,23 +1000,16 @@
       <div class="products" id="products"></div>
     </section>
 
-    <!-- VOTING SECTION -->
-    <section class="card section" id="voting" style="margin-top:16px;" data-reveal>
-      <h2>Votez pour votre préféré 🗳️</h2>
-      <p style="margin:0 0 16px 0; color:var(--muted); font-size:14px;">Quel modèle aimez-vous le plus ? Cliquez pour voter !</p>
-      <div id="voteGrid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:12px;"></div>
-    </section>
-
-    <!-- NOTES SECTION -->
-    <section class="card section" id="notes" style="margin-top:16px;" data-reveal>
-      <h2>Laissez une note 📝</h2>
-      <p style="margin:0 0 12px 0; color:var(--muted); font-size:14px;">Dites-nous ce que vous en pensez!</p>
-      <div style="display:flex; gap:10px; margin-bottom:12px; flex-wrap:wrap;">
-        <input class="input" id="noteUsername" placeholder="Votre nom" style="flex:1; min-width:150px;" />
-        <input class="input" id="noteText" placeholder="Vos commentaires..." style="flex:2; min-width:200px;" />
-        <button class="btn primary" id="submitNote" style="padding:11px 20px;">Envoyer</button>
+    <!-- UPCOMING SECTION -->
+    <section class="card section" id="upcoming" style="margin-top:16px;" data-reveal>
+      <div class="section-head">
+        <div>
+          <h2>Prochaines éditions</h2>
+          <p>Votez pour les trois prochains modèles et laissez une note pour guider la prochaine édition.</p>
+        </div>
+        <span class="pill">Vote ouvert</span>
       </div>
-      <div id="notesList" style="max-height:300px; overflow-y:auto;"></div>
+      <div class="upcoming-grid" id="upcomingGrid"></div>
     </section>
 
     <!-- FAQ -->
@@ -956,6 +1070,22 @@
       { id:"harira-club", name:"HARIRA CLUB", tag:"LOCAL", style:"Nourriture", price: DEFAULT_PRICE_MAD, desc:"Une impression ludique de culture locale que les gens comprennent immédiatement." },
     ];
 
+    const CURRENT_DESIGN = {
+      id: "atlas-wave",
+      name: "ATLAS WAVE",
+      tag: "EN VENTE",
+      style: "Minimaliste",
+      price: DEFAULT_PRICE_MAD,
+      desc: "Modèle du moment, impression centrale nette et coton blanc premium.",
+      tagline: "minimaliste • édition limitée • coton blanc"
+    };
+
+    const UPCOMING = [
+      { id:"sirocco-line", name:"SIROCCO LINE", tag:"À venir", style:"Linéaire", desc:"Lignes fines inspirées du désert, ultra épuré." },
+      { id:"zellige-azur", name:"ZELLIGE AZUR", tag:"À venir", style:"Géométrie", desc:"Motifs zellige revisités, bleu profond et or doux." },
+      { id:"casa-punch", name:"CASA PUNCH", tag:"À venir", style:"Humour", desc:"Punchline courte et locale, parfaite pour TikTok." },
+    ];
+
     // =========================
     // Fonctions utilitaires
     // =========================
@@ -984,9 +1114,11 @@ Téléphone:`;
 
       list.forEach(p => {
         const card = document.createElement("article");
-        card.className = "product";
+        const isCurrent = p.id === CURRENT_DESIGN.id;
+        card.className = `product${isCurrent ? " is-current" : ""}`;
         card.setAttribute("data-name", p.name.toLowerCase());
         card.setAttribute("data-style", p.style.toLowerCase());
+        const saleTag = isCurrent ? `<span class="pill">En vente</span>` : "";
         card.innerHTML = `
           <div class="thumb">
             <div class="mini" aria-label="Maquette de t-shirt pour ${p.name}">
@@ -996,6 +1128,7 @@ Téléphone:`;
           <div class="prod-body">
             <p class="prod-title">${p.name}</p>
             <div class="prod-meta">
+              ${saleTag}
               <span class="pill">${p.tag}</span>
               <span class="pill">${p.style}</span>
               <span class="pill price">${p.price} MAD</span>
@@ -1005,45 +1138,30 @@ Téléphone:`;
               <a class="btn small primary" href="${makeWhatsAppLink({design:p.name, price:p.price})}" target="_blank" rel="noopener">
                 💬 Commander sur WhatsApp
               </a>
-              <button class="btn small" type="button" data-feature="${p.name}">
-                ⭐ Mettre en vedette
-              </button>
             </div>
           </div>
         `;
         grid.appendChild(card);
       });
-
-      // Activer les boutons "Mettre en vedette"
-      els('button[data-feature]').forEach(btn => {
-        btn.addEventListener("click", () => setFeatured(btn.getAttribute("data-feature")));
-      });
     }
 
-    function setFeatured(name) {
-      const product = PRODUCTS.find(p => p.name === name);
-      const tag = product ? product.tag : "NOUVEAU";
-      const style = product ? product.style : "Minimaliste";
-      const tagline = product ? `${style} • édition limitée • coton blanc` : "sobre • audacieux • minimaliste";
-
-      el("#featuredPrint").innerHTML = `${name}<small>${tagline}</small>`;
-      el("#featuredTag").textContent = tag;
-      el("#whatsAppFeatured").href = makeWhatsAppLink({design:name, price: DEFAULT_PRICE_MAD});
-      // Update chips state if exists
-      els(".chip").forEach(ch => ch.setAttribute("aria-pressed", String(ch.dataset.feature === name)));
+    function renderCurrentDesign() {
+      el("#currentPrint").innerHTML = `${CURRENT_DESIGN.name}<small>${CURRENT_DESIGN.tagline}</small>`;
+      el("#currentTag").textContent = CURRENT_DESIGN.tag;
+      el("#currentStyle").textContent = CURRENT_DESIGN.style;
+      el("#currentPrice").textContent = `${CURRENT_DESIGN.price} MAD`;
+      el("#currentDesc").textContent = CURRENT_DESIGN.desc;
+      el("#whatsAppCurrent").href = makeWhatsAppLink({design: CURRENT_DESIGN.name, price: CURRENT_DESIGN.price});
     }
 
     function wireTopWhatsApp() {
       const top = el("#whatsAppTop");
       const hero = el("#whatsAppHero");
-      const featured = el("#whatsAppFeatured");
 
-      // Message par défaut si on appuie simplement sur "Commander"
-      const defaultLink = makeWhatsAppLink({design:"(Dites-moi votre modèle)", price: DEFAULT_PRICE_MAD});
+      const currentLink = makeWhatsAppLink({design: CURRENT_DESIGN.name, price: CURRENT_DESIGN.price});
 
-      top.href = defaultLink;
-      hero.href = defaultLink;
-      featured.href = makeWhatsAppLink({design: el("#featuredPrint").textContent.trim().split("\n")[0], price: DEFAULT_PRICE_MAD});
+      top.href = currentLink;
+      hero.href = currentLink;
     }
 
     // =========================
@@ -1052,13 +1170,9 @@ Téléphone:`;
     el("#year").textContent = new Date().getFullYear();
 
     renderProducts(PRODUCTS);
-    setFeatured(PRODUCTS[0].name);
+    renderCurrentDesign();
     wireTopWhatsApp();
-
-    // Pastilles de sélection du modèle en vedette
-    els(".chip").forEach(chip => {
-      chip.addEventListener("click", () => setFeatured(chip.dataset.feature));
-    });
+    renderUpcoming();
 
     // Recherche
     el("#search").addEventListener("input", (e) => {
@@ -1087,76 +1201,122 @@ Téléphone:`;
     });
 
     // =========================
-    // SYSTÈME DE VOTE
+    // PROCHAINES ÉDITIONS: votes + notes
     // =========================
-    function renderVotes() {
-      const voteGrid = el("#voteGrid");
-      voteGrid.innerHTML = "";
+    function renderUpcoming() {
+      const grid = el("#upcomingGrid");
+      if (!grid) return;
 
-      PRODUCTS.forEach(p => {
-        const voteBtn = document.createElement("div");
-        voteBtn.style.cssText = "text-align:center; padding:12px; background:rgba(255,255,255,.03); border-radius:12px; border:1px solid var(--line); cursor:pointer;";
-        
-        const countEl = document.createElement("div");
-        countEl.id = `votes-${p.id}`;
-        countEl.style.cssText = "font-size:24px; font-weight:800; margin-bottom:6px; color:var(--accent);";
-        countEl.textContent = "0";
-        
-        const nameEl = document.createElement("div");
-        nameEl.style.cssText = "font-size:12px; color:var(--muted); margin-bottom:10px;";
-        nameEl.textContent = p.name.split(" ")[0];
-        
-        const clickBtn = document.createElement("button");
-        clickBtn.className = "btn small primary";
-        clickBtn.textContent = "👍 Voter";
-        clickBtn.style.width = "100%";
-        clickBtn.addEventListener("click", () => addVote(p.id, p.name));
-        
-        voteBtn.appendChild(countEl);
-        voteBtn.appendChild(nameEl);
-        voteBtn.appendChild(clickBtn);
-        voteGrid.appendChild(voteBtn);
+      grid.innerHTML = "";
+
+      UPCOMING.forEach((design, index) => {
+        const card = document.createElement("article");
+        card.className = "upcoming-card";
+        card.setAttribute("data-reveal", "");
+        card.style.setProperty("--reveal-delay", `${0.06 * (index + 1)}s`);
+        card.innerHTML = `
+          <div class="upcoming-top">
+            <div>
+              <h3>${design.name}</h3>
+              <p class="upcoming-desc">${design.desc}</p>
+            </div>
+            <span class="pill">${design.tag}</span>
+          </div>
+          <div class="upcoming-meta">
+            <span class="pill">${design.style}</span>
+            <span class="pill">Vote ouvert</span>
+          </div>
+          <div class="upcoming-vote">
+            <div>
+              <div class="vote-count" id="votes-${design.id}">0</div>
+              <div class="vote-label">votes</div>
+            </div>
+            <button class="btn small primary" type="button" id="voteBtn-${design.id}">👍 Voter</button>
+          </div>
+          <div class="upcoming-notes">
+            <div class="upcoming-notes-title">Notes sur ce modèle</div>
+            <div class="note-form">
+              <input class="input" id="noteUsername-${design.id}" placeholder="Votre nom" />
+              <input class="input" id="noteText-${design.id}" placeholder="Votre note sur ce modèle..." />
+              <button class="btn small" type="button" id="noteSubmit-${design.id}">Envoyer</button>
+            </div>
+            <div class="notes-list" id="notes-${design.id}"></div>
+          </div>
+        `;
+        grid.appendChild(card);
       });
 
-      // Charger les votes depuis Firebase
+      UPCOMING.forEach(design => {
+        const voteBtn = el(`#voteBtn-${design.id}`);
+        if (voteBtn) {
+          voteBtn.addEventListener("click", () => addUpcomingVote(design.id));
+        }
+
+        const submitBtn = el(`#noteSubmit-${design.id}`);
+        const noteInput = el(`#noteText-${design.id}`);
+        if (submitBtn) {
+          submitBtn.addEventListener("click", () => submitDesignNote(design.id));
+        }
+        if (noteInput) {
+          noteInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              submitDesignNote(design.id);
+            }
+          });
+        }
+      });
+
+      listenToUpcomingVotes();
+      UPCOMING.forEach(design => listenToDesignNotes(design.id));
+    }
+
+    function listenToUpcomingVotes() {
       db.ref("votes").on("value", (snapshot) => {
         const votes = snapshot.val() || {};
-        PRODUCTS.forEach(p => {
-          const count = votes[p.id] || 0;
-          const el = document.getElementById(`votes-${p.id}`);
-          if (el) el.textContent = count;
+        UPCOMING.forEach(design => {
+          const count = votes[design.id] || 0;
+          const counter = document.getElementById(`votes-${design.id}`);
+          if (counter) counter.textContent = count;
         });
       });
     }
 
-    function addVote(productId, productName) {
-      db.ref(`votes/${productId}`).transaction((current) => {
+    function addUpcomingVote(designId) {
+      db.ref(`votes/${designId}`).transaction((current) => {
         return (current || 0) + 1;
       });
     }
 
-    // =========================
-    // SYSTÈME DE NOTES
-    // =========================
-    function renderNotes() {
-      db.ref("notes").orderByChild("timestamp").limitToLast(50).on("value", (snapshot) => {
-        const notesList = el("#notesList");
+    function listenToDesignNotes(designId) {
+      db.ref("notes").orderByChild("designId").equalTo(designId).limitToLast(30).on("value", (snapshot) => {
+        const notesList = el(`#notes-${designId}`);
+        if (!notesList) return;
+
         const notesData = snapshot.val() || {};
-        
+        const keys = Object.keys(notesData);
         notesList.innerHTML = "";
-        Object.keys(notesData).reverse().forEach(key => {
+
+        if (!keys.length) {
+          notesList.innerHTML = `<p class="note-empty">Pas encore de notes pour ce modèle.</p>`;
+          return;
+        }
+
+        keys.reverse().forEach(key => {
           const note = notesData[key];
           const noteEl = document.createElement("div");
-          noteEl.style.cssText = "padding:10px; background:rgba(255,255,255,.02); border-left:3px solid var(--accent); margin-bottom:8px; border-radius:4px; font-size:13px;";
+          noteEl.className = "note-item";
           noteEl.innerHTML = `<strong>${escapeHtml(note.username || 'Anonyme')}</strong><br/><span style="color:var(--muted);">${escapeHtml(note.text)}</span>`;
           notesList.appendChild(noteEl);
         });
       });
     }
 
-    function submitNote() {
-      const username = el("#noteUsername").value.trim();
-      const text = el("#noteText").value.trim();
+    function submitDesignNote(designId) {
+      const usernameEl = el(`#noteUsername-${designId}`);
+      const textEl = el(`#noteText-${designId}`);
+      const username = usernameEl ? usernameEl.value.trim() : "";
+      const text = textEl ? textEl.value.trim() : "";
 
       if (!text) {
         alert("Veuillez entrer un commentaire!");
@@ -1166,13 +1326,14 @@ Téléphone:`;
       db.ref("notes").push({
         username: username || "Anonyme",
         text: text,
+        designId: designId,
         timestamp: new Date().getTime()
       }, (error) => {
         if (error) {
           alert("Erreur lors de l'envoi: " + error.message);
         } else {
-          el("#noteUsername").value = "";
-          el("#noteText").value = "";
+          if (usernameEl) usernameEl.value = "";
+          if (textEl) textEl.value = "";
         }
       });
     }
@@ -1182,19 +1343,6 @@ Téléphone:`;
       div.textContent = text;
       return div.innerHTML;
     }
-
-    // Connecter la soumission de notes
-    el("#submitNote").addEventListener("click", submitNote);
-    el("#noteText").addEventListener("keypress", (e) => {
-      if (e.key === "Enter" && !e.shiftKey) {
-        e.preventDefault();
-        submitNote();
-      }
-    });
-
-    // Initialiser le vote et les notes au chargement de la page
-    renderVotes();
-    renderNotes();
 
     // Révélation progressive au scroll
     const revealElements = els("[data-reveal]");
