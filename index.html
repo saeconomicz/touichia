@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Touichia — T-Shirt Prints</title>
-  <meta name="description" content="Touichia — limited-run Moroccan-inspired t-shirt prints. Order on WhatsApp. Drops, designs, and delivery across Morocco." />
+  <title>Touichia — Impressions de T-Shirts</title>
+  <meta name="description" content="Touichia — impressions de t-shirts marocains en édition limitée. Commandez sur WhatsApp. Éditions, modèles et livraison dans tout le Maroc." />
   <style>
     :root{
       --bg:#0b0b0f;
@@ -27,6 +27,7 @@
     
     *{box-sizing:border-box}
     html,body{height:100%}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
       font-family: 'Poppins', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto;
@@ -53,6 +54,25 @@
         repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(0,78,137,.02) 35px, rgba(0,78,137,.02) 70px);
       pointer-events: none;
       z-index: -1;
+    }
+
+    body::after {
+      content:"";
+      position: fixed;
+      inset: -10% -10%;
+      background:
+        radial-gradient(900px 600px at 12% 20%, rgba(0,78,137,.18), transparent 60%),
+        radial-gradient(700px 500px at 85% 10%, rgba(212,175,55,.18), transparent 55%),
+        radial-gradient(600px 520px at 50% 90%, rgba(25,195,125,.12), transparent 60%);
+      opacity:.8;
+      z-index:-2;
+      pointer-events:none;
+      animation: drift 22s ease-in-out infinite alternate;
+    }
+
+    @keyframes drift {
+      from { transform: translateY(-1%); }
+      to { transform: translateY(1%); }
     }
     
     a{color:inherit; text-decoration:none}
@@ -138,6 +158,41 @@
       color: var(--moroccan-gold);
       background: rgba(212,175,55,.08);
       font-weight: 600;
+    }
+
+    /* TICKER */
+    .ticker{
+      margin-top:12px;
+      border:1px solid var(--line);
+      border-radius: 999px;
+      overflow:hidden;
+      background: rgba(18,18,26,.55);
+      box-shadow: 0 10px 26px rgba(0,0,0,.25);
+    }
+    .ticker-track{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      white-space:nowrap;
+      padding:8px 16px;
+      animation: ticker 26s linear infinite;
+    }
+    .ticker-item{
+      font-size:12px;
+      text-transform: uppercase;
+      letter-spacing:.35px;
+      color: var(--moroccan-gold);
+    }
+    .ticker-dot{
+      width:4px; height:4px; border-radius:999px;
+      background: rgba(212,175,55,.5);
+      display:inline-block;
+      margin:0 6px;
+    }
+
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
     }
 
     /* HERO */
@@ -355,6 +410,97 @@
       line-height: 1.6;
     }
 
+    .section-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:12px;
+    }
+    .section-head p{
+      margin-top:6px;
+      max-width: 60ch;
+    }
+
+    /* MOODBOARD */
+    .mood-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:12px;
+    }
+    .mood{
+      border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      overflow:hidden;
+      display:grid;
+      grid-template-rows: 110px auto;
+      transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    }
+    .mood:hover{
+      transform: translateY(-4px);
+      border-color: rgba(212,175,55,.35);
+      box-shadow: 0 18px 40px rgba(0,0,0,.35);
+    }
+    .mood-visual{
+      position:relative;
+      overflow:hidden;
+    }
+    .mood-visual::before{
+      content:"";
+      position:absolute;
+      inset:-40% -20%;
+      transform: rotate(12deg);
+      opacity:.95;
+    }
+    .mood-1::before{
+      background:
+        radial-gradient(circle at 30% 30%, rgba(212,175,55,.55), transparent 55%),
+        radial-gradient(circle at 70% 70%, rgba(0,78,137,.45), transparent 55%),
+        linear-gradient(135deg, rgba(11,11,15,.95), rgba(0,78,137,.2));
+    }
+    .mood-2::before{
+      background:
+        radial-gradient(circle at 30% 40%, rgba(25,195,125,.5), transparent 60%),
+        radial-gradient(circle at 80% 20%, rgba(212,175,55,.45), transparent 55%),
+        linear-gradient(135deg, rgba(11,11,15,.95), rgba(25,195,125,.18));
+    }
+    .mood-3::before{
+      background:
+        radial-gradient(circle at 35% 35%, rgba(212,175,55,.45), transparent 60%),
+        radial-gradient(circle at 70% 60%, rgba(160,82,45,.45), transparent 55%),
+        linear-gradient(135deg, rgba(11,11,15,.95), rgba(160,82,45,.22));
+    }
+    .mood-body{
+      padding:14px;
+    }
+    .mood-body h3{
+      margin:0 0 6px 0;
+      font-size:16px;
+      color: var(--moroccan-gold);
+      font-weight:800;
+    }
+    .mood-body p{
+      margin:0 0 10px 0;
+      color: var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+    .mood-tags{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .mood-tag{
+      font-size:11px;
+      padding:6px 8px;
+      border-radius:999px;
+      border:1px solid rgba(212,175,55,.4);
+      color: var(--moroccan-gold);
+      background: rgba(212,175,55,.08);
+      font-weight:600;
+    }
+
     /* CATALOG */
     .catalog{
       margin-top:16px;
@@ -480,6 +626,18 @@
     }
     .btn.small{padding:10px 12px; font-size: 13px; box-shadow:none}
 
+    /* REVEAL */
+    [data-reveal]{
+      opacity:0;
+      transform: translateY(16px) scale(.98);
+      transition: opacity .6s ease, transform .6s ease;
+      transition-delay: var(--reveal-delay, 0s);
+    }
+    [data-reveal].is-visible{
+      opacity:1;
+      transform: none;
+    }
+
     /* FOOTER */
     footer{
       margin:16px 0 28px 0;
@@ -501,104 +659,129 @@
       .hero::before { display: none; }
       .products{grid-template-columns: repeat(2, 1fr)}
       .grid2{grid-template-columns:1fr}
+      .mood-grid{grid-template-columns: repeat(2, 1fr)}
       .navlinks{display:none}
     }
     @media (max-width: 520px){
       .wrap{padding:14px}
       .stats{grid-template-columns:1fr}
       .products{grid-template-columns:1fr}
+      .mood-grid{grid-template-columns:1fr}
       .input{min-width: 0; width: 100%}
       .catalog-top{align-items:stretch}
       .cta{gap:8px}
       .btn{padding:10px 12px}
       h1{font-size: clamp(24px, 3vw, 36px)}
     }
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      body::after{animation:none}
+      .ticker-track{animation:none}
+      [data-reveal]{opacity:1; transform:none}
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <!-- NAV -->
-    <header class="nav" role="navigation" aria-label="Touichia navigation">
-      <a class="brand" href="#top" aria-label="Touichia home">
+    <header class="nav" role="navigation" aria-label="Navigation Touichia">
+      <a class="brand" href="#top" aria-label="Accueil Touichia">
         <span class="logo" aria-hidden="true"></span>
         <span>Touichia</span>
-        <span class="pill">Limited drop</span>
+        <span class="pill">Édition limitée</span>
       </a>
 
       <nav class="navlinks" aria-label="Sections">
-        <a href="#catalog">Designs</a>
-        <a href="#how">How it works</a>
+        <a href="#catalog">Modèles</a>
+        <a href="#how">Comment ça marche</a>
         <a href="#faq">FAQ</a>
       </nav>
 
       <div class="cta">
-        <a class="btn primary" id="whatsAppTop" href="#" role="button" aria-label="Order on WhatsApp">
+        <a class="btn primary" id="whatsAppTop" href="#" role="button" aria-label="Commander sur WhatsApp">
           <!-- simple icon -->
           <span aria-hidden="true">💬</span>
-          <span>Order on WhatsApp</span>
+          <span>Commander sur WhatsApp</span>
         </a>
       </div>
     </header>
 
+    <div class="ticker" aria-label="Infos de l'édition">
+      <div class="ticker-track">
+        <span class="ticker-item">Édition limitée</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Coton blanc premium</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Commande WhatsApp</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Paiement à la livraison</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Livraison 24–72h</span><span class="ticker-dot"></span>
+        <span class="ticker-item">Casablanca</span><span class="ticker-dot"></span>
+        <span class="ticker-item" aria-hidden="true">Édition limitée</span><span class="ticker-dot" aria-hidden="true"></span>
+        <span class="ticker-item" aria-hidden="true">Coton blanc premium</span><span class="ticker-dot" aria-hidden="true"></span>
+        <span class="ticker-item" aria-hidden="true">Commande WhatsApp</span><span class="ticker-dot" aria-hidden="true"></span>
+        <span class="ticker-item" aria-hidden="true">Paiement à la livraison</span><span class="ticker-dot" aria-hidden="true"></span>
+        <span class="ticker-item" aria-hidden="true">Livraison 24–72h</span><span class="ticker-dot" aria-hidden="true"></span>
+        <span class="ticker-item" aria-hidden="true">Casablanca</span><span class="ticker-dot" aria-hidden="true"></span>
+      </div>
+    </div>
+
     <!-- HERO -->
-    <main id="top" class="hero" aria-label="Landing">
-      <section class="card hero-left">
+    <main id="top" class="hero" aria-label="Accueil">
+      <section class="card hero-left" data-reveal>
         <div class="kicker">
-          <span class="pill">Casablanca made</span>
-          <span class="pill">Cotton tees</span>
-          <span class="pill">Fast delivery</span>
+          <span class="pill">Fait à Casablanca</span>
+          <span class="pill">T-shirts en coton</span>
+          <span class="pill">Livraison rapide</span>
         </div>
-        <h1>Wear a print that hits.<br/>Small drop. Big vibe.</h1>
+        <h1>Portez une impression qui cartonne.<br/>Petite édition. Grande ambiance.</h1>
         <p class="sub">
-          Touichia sells limited-run white cotton T-shirts with bold, clean prints.
-          See designs on TikTok, order via WhatsApp, and get delivery anywhere in Morocco.
+          Touichia vend des t-shirts blancs en coton avec des impressions audacieuses et épurées en édition limitée.
+          Découvrez les modèles sur TikTok, commandez via WhatsApp et recevez votre livraison partout au Maroc.
         </p>
 
         <div class="hero-actions">
           <a class="btn primary" id="whatsAppHero" href="#">
             <span aria-hidden="true">✅</span>
-            <span>Order now (WhatsApp)</span>
+            <span>Commander maintenant (WhatsApp)</span>
           </a>
           <a class="btn" href="#catalog">
             <span aria-hidden="true">👕</span>
-            <span>View designs</span>
+            <span>Voir les modèles</span>
           </a>
         </div>
 
-        <div class="stats" aria-label="Highlights">
+        <div class="stats" aria-label="Points forts">
           <div class="stat">
-            <b>20 pcs / drop</b>
-            <span>Scarcity that sells</span>
+            <b>20 pièces / édition</b>
+            <span>La rareté qui se vend</span>
           </div>
           <div class="stat">
-            <b>COD available</b>
-            <span>Pay on delivery</span>
+            <b>Paiement à la livraison</b>
+            <span>Payez à la réception</span>
           </div>
           <div class="stat">
             <b>24–72h</b>
-            <span>Typical delivery time</span>
+            <span>Délai de livraison typique</span>
           </div>
         </div>
       </section>
 
-      <aside class="card hero-right" aria-label="Featured design preview">
+      <aside class="card hero-right" aria-label="Aperçu du modèle en vedette" data-reveal style="--reveal-delay:.08s;">
         <div class="mock">
           <div class="mock-top">
-            <span>Featured print</span>
-            <span class="pill" id="featuredTag">NEW</span>
+            <span>Modèle en vedette</span>
+            <span class="pill" id="featuredTag">NOUVEAU</span>
           </div>
 
           <div class="shirt">
-            <div class="tee" aria-label="T-shirt mockup">
+            <div class="tee" aria-label="Maquette de t-shirt">
               <div class="print" id="featuredPrint">
                 ATLAS WAVE
-                <small>clean • bold • minimal</small>
+                <small>sobre • audacieux • minimaliste</small>
               </div>
             </div>
           </div>
 
           <div class="mock-bottom">
-            <div class="selector" aria-label="Featured design selector">
+            <div class="selector" aria-label="Sélecteur du modèle en vedette">
               <button class="chip" aria-pressed="true" data-feature="ATLAS WAVE">Atlas</button>
               <button class="chip" aria-pressed="false" data-feature="MINT ZELLIGE">Zellige</button>
               <button class="chip" aria-pressed="false" data-feature="CASA HUMOR">Casa</button>
@@ -606,7 +789,7 @@
 
             <a class="btn small primary" id="whatsAppFeatured" href="#">
               <span aria-hidden="true">🟢</span>
-              <span>Order this design</span>
+              <span>Commander ce modèle</span>
             </a>
           </div>
         </div>
@@ -614,33 +797,82 @@
     </main>
 
     <!-- INFO STRIP -->
-    <section class="grid2" aria-label="Value propositions">
-      <div class="card section" id="how">
-        <h2>How ordering works</h2>
+    <section class="grid2" aria-label="Propositions de valeur">
+      <div class="card section" id="how" data-reveal>
+        <h2>Comment commander</h2>
         <p>
-          1) Pick a design → 2) Tap WhatsApp → 3) Send size + city → 4) Confirm address → 5) Delivery.
+          1) Choisissez un modèle → 2) Appuyez sur WhatsApp → 3) Envoyez la taille + ville → 4) Confirmez l'adresse → 5) Livraison.
         </p>
       </div>
 
-      <div class="card section">
-        <h2>Made for TikTok selling</h2>
+      <div class="card section" data-reveal style="--reveal-delay:.08s;">
+        <h2>Conçu pour la vente TikTok</h2>
         <p>
-          Each design comes with a short description you can paste in comments and a ready WhatsApp order message.
+          Chaque modèle est accompagné d'une courte description que vous pouvez coller dans les commentaires et d'un message de commande WhatsApp prêt.
         </p>
       </div>
     </section>
 
+    <!-- MOODBOARD -->
+    <section class="card section moodboard" id="mood" aria-label="Ambiances">
+      <div class="section-head" data-reveal>
+        <div>
+          <h2>Ambiances de l'édition</h2>
+          <p>Trois univers visuels pour mélanger minimalisme, géométrie marocaine et humour local — parfaits pour TikTok.</p>
+        </div>
+        <span class="pill">Nouveau</span>
+      </div>
+
+      <div class="mood-grid">
+        <article class="mood" data-reveal style="--reveal-delay:.06s;">
+          <div class="mood-visual mood-1" aria-hidden="true"></div>
+          <div class="mood-body">
+            <h3>Atlas minimaliste</h3>
+            <p>Contours nets, contrastes chauds et impression centrale propre.</p>
+            <div class="mood-tags">
+              <span class="mood-tag">Lignes nettes</span>
+              <span class="mood-tag">Édition limitée</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="mood" data-reveal style="--reveal-delay:.12s;">
+          <div class="mood-visual mood-2" aria-hidden="true"></div>
+          <div class="mood-body">
+            <h3>Zellige menthe</h3>
+            <p>Géométrie moderne, détails fins, ambiance méditerranéenne.</p>
+            <div class="mood-tags">
+              <span class="mood-tag">Géométrie</span>
+              <span class="mood-tag">Coton blanc</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="mood" data-reveal style="--reveal-delay:.18s;">
+          <div class="mood-visual mood-3" aria-hidden="true"></div>
+          <div class="mood-body">
+            <h3>Casa humour</h3>
+            <p>Punchlines courtes, clin d'œil local, partage facile.</p>
+            <div class="mood-tags">
+              <span class="mood-tag">Humour local</span>
+              <span class="mood-tag">Partage</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
     <!-- CATALOG -->
-    <section class="card catalog" id="catalog" aria-label="Design catalog">
+    <section class="card catalog" id="catalog" aria-label="Catalogue des modèles" data-reveal>
       <div class="catalog-top">
         <div>
-          <h2 style="margin:0 0 6px 0;">Designs</h2>
-          <p style="margin:0; color:var(--muted); font-size:14px;">Tap a design to order. Replace these placeholders with your real artwork later.</p>
+          <h2 style="margin:0 0 6px 0;">Modèles</h2>
+          <p style="margin:0; color:var(--muted); font-size:14px;">Appuyez sur un modèle pour commander. Remplacez ces exemples par vos vrais visuels plus tard.</p>
         </div>
 
         <div class="filters">
-          <input class="input" id="search" placeholder="Search designs (e.g., zellige, casa...)" />
-          <button class="btn small" id="toggleGrid" type="button">Toggle compact view</button>
+          <input class="input" id="search" placeholder="Rechercher des modèles (ex: zellige, casa...)" />
+          <button class="btn small" id="toggleGrid" type="button">Vue compacte</button>
         </div>
       </div>
 
@@ -648,39 +880,39 @@
     </section>
 
     <!-- VOTING SECTION -->
-    <section class="card section" id="voting" style="margin-top:16px;">
-      <h2>Vote for Your Favorite 🗳️</h2>
-      <p style="margin:0 0 16px 0; color:var(--muted); font-size:14px;">Which design do you love most? Click to vote!</p>
+    <section class="card section" id="voting" style="margin-top:16px;" data-reveal>
+      <h2>Votez pour votre préféré 🗳️</h2>
+      <p style="margin:0 0 16px 0; color:var(--muted); font-size:14px;">Quel modèle aimez-vous le plus ? Cliquez pour voter !</p>
       <div id="voteGrid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:12px;"></div>
     </section>
 
     <!-- NOTES SECTION -->
-    <section class="card section" id="notes" style="margin-top:16px;">
-      <h2>Leave a Note 📝</h2>
-      <p style="margin:0 0 12px 0; color:var(--muted); font-size:14px;">Tell us what you think!</p>
+    <section class="card section" id="notes" style="margin-top:16px;" data-reveal>
+      <h2>Laissez une note 📝</h2>
+      <p style="margin:0 0 12px 0; color:var(--muted); font-size:14px;">Dites-nous ce que vous en pensez!</p>
       <div style="display:flex; gap:10px; margin-bottom:12px; flex-wrap:wrap;">
-        <input class="input" id="noteUsername" placeholder="Your name" style="flex:1; min-width:150px;" />
-        <input class="input" id="noteText" placeholder="Your feedback..." style="flex:2; min-width:200px;" />
-        <button class="btn primary" id="submitNote" style="padding:11px 20px;">Post</button>
+        <input class="input" id="noteUsername" placeholder="Votre nom" style="flex:1; min-width:150px;" />
+        <input class="input" id="noteText" placeholder="Vos commentaires..." style="flex:2; min-width:200px;" />
+        <button class="btn primary" id="submitNote" style="padding:11px 20px;">Envoyer</button>
       </div>
       <div id="notesList" style="max-height:300px; overflow-y:auto;"></div>
     </section>
 
     <!-- FAQ -->
-    <section class="card section" id="faq" style="margin-top:16px;">
+    <section class="card section" id="faq" style="margin-top:16px;" data-reveal>
       <h2>FAQ</h2>
       <p style="margin-top:8px;">
-        <b>Payment?</b> Cash on delivery (COD) or bank transfer (optional).<br/>
-        <b>Sizes?</b> S–XL depending on stock. For first drops, keep it simple (M/L).<br/>
-        <b>Delivery time?</b> Usually 24–72h depending on city and courier.<br/>
-        <b>Returns?</b> If print is damaged on arrival, we replace (photo proof).
+        <b>Paiement?</b> Paiement à la livraison (PAL) ou virement bancaire (optionnel).<br/>
+        <b>Tailles?</b> S–XL selon le stock. Pour les premières éditions, restez simple (M/L).<br/>
+        <b>Délai de livraison?</b> Généralement 24–72h selon la ville et le livreur.<br/>
+        <b>Retours?</b> Si l'impression est endommagée à l'arrivée, nous la remplaçons (preuve photo).
       </p>
     </section>
 
     <footer>
       <p class="fine">
-        © <span id="year"></span> Touichia. Built for small drops in Casablanca.  
-        <span style="display:block; margin-top:6px;">Tip: edit the WhatsApp number + price in the script at the bottom.</span>
+        © <span id="year"></span> Touichia. Conçu pour les petites éditions à Casablanca.  
+        <span style="display:block; margin-top:6px;">Conseil: modifiez le numéro WhatsApp + le prix dans le script en bas.</span>
       </p>
     </footer>
   </div>
@@ -690,7 +922,7 @@
 
   <script>
     // =========================
-    // Firebase Config
+    // Configuration Firebase
     // =========================
     const firebaseConfig = {
       apiKey: "AIzaSyCRo5ZfLt1nCmCEXFwES65AkF-pJYhT8FI",
@@ -703,45 +935,45 @@
       measurementId: "G-YRMGEH8FNV"
     };
 
-    // Initialize Firebase
+    // Initialiser Firebase
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
     // =========================
-    // CONFIG — change these
+    // CONFIG — modifiez ces valeurs
     // =========================
     const BRAND = "Touichia";
-    const WHATSAPP_NUMBER_INTERNATIONAL = "212600000000"; // <-- replace with your number (Morocco: 212 + number without leading 0)
+    const WHATSAPP_NUMBER_INTERNATIONAL = "212600000000"; // <-- remplacez par votre numéro (Maroc: 212 + numéro sans 0 initial)
     const DEFAULT_PRICE_MAD = 139;
     const DEFAULT_CITY = "Casablanca";
 
-    // Products (placeholder designs — replace names/descriptions/prices)
+    // Produits (modèles d'exemple — remplacez les noms/descriptions/prix)
     const PRODUCTS = [
-      { id:"atlas-wave", name:"ATLAS WAVE", tag:"NEW", style:"Minimal", price: DEFAULT_PRICE_MAD, desc:"Bold minimal block print. Clean look on white cotton." },
-      { id:"mint-zellige", name:"MINT ZELLIGE", tag:"BEST", style:"Geometry", price: DEFAULT_PRICE_MAD, desc:"Geometric Moroccan tile vibe, modern and crisp." },
-      { id:"casa-humor", name:"CASA HUMOR", tag:"FUN", style:"Humor", price: DEFAULT_PRICE_MAD, desc:"A clean funny print made for TikTok comments & shares." },
-      { id:"sahara-line", name:"SAHARA LINE", tag:"DROP", style:"Abstract", price: DEFAULT_PRICE_MAD, desc:"Abstract desert linework. Simple, wearable, aesthetic." },
-      { id:"lion-motif", name:"LION MOTIF", tag:"HOT", style:"Iconic", price: DEFAULT_PRICE_MAD + 10, desc:"Iconic strong symbol print. Great for statement fits." },
-      { id:"harira-club", name:"HARIRA CLUB", tag:"LOCAL", style:"Food", price: DEFAULT_PRICE_MAD, desc:"A playful local-culture print that people instantly get." },
+      { id:"atlas-wave", name:"ATLAS WAVE", tag:"NOUVEAU", style:"Minimaliste", price: DEFAULT_PRICE_MAD, desc:"Impression de bloc minimaliste audacieuse. Rendu épuré sur coton blanc." },
+      { id:"mint-zellige", name:"MINT ZELLIGE", tag:"MEILLEUR", style:"Géométrie", price: DEFAULT_PRICE_MAD, desc:"Inspiration géométrique de carreaux marocains, moderne et épurée." },
+      { id:"casa-humor", name:"CASA HUMOR", tag:"AMUSANT", style:"Humour", price: DEFAULT_PRICE_MAD, desc:"Une impression drôle et épurée faite pour les commentaires TikTok et les partages." },
+      { id:"sahara-line", name:"SAHARA LINE", tag:"ÉDITION", style:"Abstrait", price: DEFAULT_PRICE_MAD, desc:"Linéarité abstraite du désert. Simple, facile à porter, esthétique." },
+      { id:"lion-motif", name:"LION MOTIF", tag:"CHAUD", style:"Iconique", price: DEFAULT_PRICE_MAD + 10, desc:"Impression d'un symbole fort et iconique. Parfait pour des tenues affirmées." },
+      { id:"harira-club", name:"HARIRA CLUB", tag:"LOCAL", style:"Nourriture", price: DEFAULT_PRICE_MAD, desc:"Une impression ludique de culture locale que les gens comprennent immédiatement." },
     ];
 
     // =========================
-    // Helpers
+    // Fonctions utilitaires
     // =========================
     const el = (sel, parent=document) => parent.querySelector(sel);
     const els = (sel, parent=document) => [...parent.querySelectorAll(sel)];
 
     function makeWhatsAppLink({design, price, city}) {
       const msg =
-`Salam! I want to order from ${BRAND} ✅
-Design: ${design}
-Size: (S/M/L/XL)
-Color: White
-City: ${city || DEFAULT_CITY}
-Quantity: 1
-Price: ${price} MAD
-Name:
-Address:
-Phone:`;
+`Salam! Je veux commander de ${BRAND} ✅
+Modèle: ${design}
+Taille: (S/M/L/XL)
+Couleur: Blanc
+Ville: ${city || DEFAULT_CITY}
+Quantité: 1
+Prix: ${price} MAD
+Nom:
+Adresse:
+Téléphone:`;
       const encoded = encodeURIComponent(msg);
       return `https://wa.me/${WHATSAPP_NUMBER_INTERNATIONAL}?text=${encoded}`;
     }
@@ -757,7 +989,7 @@ Phone:`;
         card.setAttribute("data-style", p.style.toLowerCase());
         card.innerHTML = `
           <div class="thumb">
-            <div class="mini" aria-label="T-shirt mockup for ${p.name}">
+            <div class="mini" aria-label="Maquette de t-shirt pour ${p.name}">
               <div class="badge">${p.name}</div>
             </div>
           </div>
@@ -771,10 +1003,10 @@ Phone:`;
             <p style="margin:0; color:var(--muted); font-size:13px;">${p.desc}</p>
             <div class="prod-actions">
               <a class="btn small primary" href="${makeWhatsAppLink({design:p.name, price:p.price})}" target="_blank" rel="noopener">
-                💬 Order on WhatsApp
+                💬 Commander sur WhatsApp
               </a>
               <button class="btn small" type="button" data-feature="${p.name}">
-                ⭐ Set as featured
+                ⭐ Mettre en vedette
               </button>
             </div>
           </div>
@@ -782,14 +1014,20 @@ Phone:`;
         grid.appendChild(card);
       });
 
-      // Hook "Set as featured" buttons
+      // Activer les boutons "Mettre en vedette"
       els('button[data-feature]').forEach(btn => {
         btn.addEventListener("click", () => setFeatured(btn.getAttribute("data-feature")));
       });
     }
 
     function setFeatured(name) {
-      el("#featuredPrint").innerHTML = `${name}<small>clean • bold • minimal</small>`;
+      const product = PRODUCTS.find(p => p.name === name);
+      const tag = product ? product.tag : "NOUVEAU";
+      const style = product ? product.style : "Minimaliste";
+      const tagline = product ? `${style} • édition limitée • coton blanc` : "sobre • audacieux • minimaliste";
+
+      el("#featuredPrint").innerHTML = `${name}<small>${tagline}</small>`;
+      el("#featuredTag").textContent = tag;
       el("#whatsAppFeatured").href = makeWhatsAppLink({design:name, price: DEFAULT_PRICE_MAD});
       // Update chips state if exists
       els(".chip").forEach(ch => ch.setAttribute("aria-pressed", String(ch.dataset.feature === name)));
@@ -800,8 +1038,8 @@ Phone:`;
       const hero = el("#whatsAppHero");
       const featured = el("#whatsAppFeatured");
 
-      // Default message if they just tap "Order"
-      const defaultLink = makeWhatsAppLink({design:"(Tell me your design)", price: DEFAULT_PRICE_MAD});
+      // Message par défaut si on appuie simplement sur "Commander"
+      const defaultLink = makeWhatsAppLink({design:"(Dites-moi votre modèle)", price: DEFAULT_PRICE_MAD});
 
       top.href = defaultLink;
       hero.href = defaultLink;
@@ -809,19 +1047,20 @@ Phone:`;
     }
 
     // =========================
-    // Init
+    // Initialisation
     // =========================
     el("#year").textContent = new Date().getFullYear();
 
-    wireTopWhatsApp();
     renderProducts(PRODUCTS);
+    setFeatured(PRODUCTS[0].name);
+    wireTopWhatsApp();
 
-    // Featured selector chips
+    // Pastilles de sélection du modèle en vedette
     els(".chip").forEach(chip => {
       chip.addEventListener("click", () => setFeatured(chip.dataset.feature));
     });
 
-    // Search
+    // Recherche
     el("#search").addEventListener("input", (e) => {
       const q = e.target.value.trim().toLowerCase();
       const filtered = PRODUCTS.filter(p =>
@@ -833,7 +1072,7 @@ Phone:`;
       renderProducts(filtered);
     });
 
-    // Compact toggle
+    // Basculer entre vues compacte et normale
     let compact = false;
     el("#toggleGrid").addEventListener("click", () => {
       compact = !compact;
@@ -841,14 +1080,14 @@ Phone:`;
       grid.style.gridTemplateColumns = compact
         ? "repeat(2, 1fr)"
         : "";
-      // On desktop compact = 4 columns; on mobile it stays 1 column anyway
+      // Sur bureau: compacte = 4 colonnes; sur mobile: reste 1 colonne
       if (window.matchMedia("(min-width: 921px)").matches) {
         grid.style.gridTemplateColumns = compact ? "repeat(4, 1fr)" : "repeat(3, 1fr)";
       }
     });
 
     // =========================
-    // VOTING SYSTEM
+    // SYSTÈME DE VOTE
     // =========================
     function renderVotes() {
       const voteGrid = el("#voteGrid");
@@ -869,7 +1108,7 @@ Phone:`;
         
         const clickBtn = document.createElement("button");
         clickBtn.className = "btn small primary";
-        clickBtn.textContent = "👍 Vote";
+        clickBtn.textContent = "👍 Voter";
         clickBtn.style.width = "100%";
         clickBtn.addEventListener("click", () => addVote(p.id, p.name));
         
@@ -879,7 +1118,7 @@ Phone:`;
         voteGrid.appendChild(voteBtn);
       });
 
-      // Load votes from Firebase
+      // Charger les votes depuis Firebase
       db.ref("votes").on("value", (snapshot) => {
         const votes = snapshot.val() || {};
         PRODUCTS.forEach(p => {
@@ -897,7 +1136,7 @@ Phone:`;
     }
 
     // =========================
-    // NOTES SYSTEM
+    // SYSTÈME DE NOTES
     // =========================
     function renderNotes() {
       db.ref("notes").orderByChild("timestamp").limitToLast(50).on("value", (snapshot) => {
@@ -909,7 +1148,7 @@ Phone:`;
           const note = notesData[key];
           const noteEl = document.createElement("div");
           noteEl.style.cssText = "padding:10px; background:rgba(255,255,255,.02); border-left:3px solid var(--accent); margin-bottom:8px; border-radius:4px; font-size:13px;";
-          noteEl.innerHTML = `<strong>${escapeHtml(note.username || 'Anonymous')}</strong><br/><span style="color:var(--muted);">${escapeHtml(note.text)}</span>`;
+          noteEl.innerHTML = `<strong>${escapeHtml(note.username || 'Anonyme')}</strong><br/><span style="color:var(--muted);">${escapeHtml(note.text)}</span>`;
           notesList.appendChild(noteEl);
         });
       });
@@ -920,17 +1159,17 @@ Phone:`;
       const text = el("#noteText").value.trim();
 
       if (!text) {
-        alert("Please enter a note!");
+        alert("Veuillez entrer un commentaire!");
         return;
       }
 
       db.ref("notes").push({
-        username: username || "Anonymous",
+        username: username || "Anonyme",
         text: text,
         timestamp: new Date().getTime()
       }, (error) => {
         if (error) {
-          alert("Error posting note: " + error.message);
+          alert("Erreur lors de l'envoi: " + error.message);
         } else {
           el("#noteUsername").value = "";
           el("#noteText").value = "";
@@ -944,7 +1183,7 @@ Phone:`;
       return div.innerHTML;
     }
 
-    // Hook note submission
+    // Connecter la soumission de notes
     el("#submitNote").addEventListener("click", submitNote);
     el("#noteText").addEventListener("keypress", (e) => {
       if (e.key === "Enter" && !e.shiftKey) {
@@ -953,9 +1192,26 @@ Phone:`;
       }
     });
 
-    // Initialize voting and notes on page load
+    // Initialiser le vote et les notes au chargement de la page
     renderVotes();
     renderNotes();
+
+    // Révélation progressive au scroll
+    const revealElements = els("[data-reveal]");
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.18 });
+
+      revealElements.forEach(el => revealObserver.observe(el));
+    } else {
+      revealElements.forEach(el => el.classList.add("is-visible"));
+    }
   </script>
 </body>
 </html>

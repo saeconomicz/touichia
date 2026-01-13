@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Touichia — Admin Panel</title>
+  <title>Touichia — Panneau d'Administration</title>
   <style>
     :root{
       --bg:#0b0b0f;
@@ -112,28 +112,28 @@
   <div class="container">
     <!-- LOGIN -->
     <div id="loginPanel" class="login">
-      <h2 style="text-align:center; margin:0 0 20px 0">Touichia Admin</h2>
-      <input class="input" id="adminPassword" type="password" placeholder="Enter admin password" />
-      <button class="btn" id="loginBtn">Login</button>
+      <h2 style="text-align:center; margin:0 0 20px 0">Administration Touichia</h2>
+      <input class="input" id="adminPassword" type="password" placeholder="Entrez le mot de passe administrateur" />
+      <button class="btn" id="loginBtn">Connexion</button>
     </div>
 
     <!-- ADMIN DASHBOARD -->
     <div id="adminPanel">
-      <button class="logout-btn" id="logoutBtn">Logout</button>
+      <button class="logout-btn" id="logoutBtn">Déconnexion</button>
       
-      <h1>📊 Admin Dashboard</h1>
+      <h1>📊 Tableau de bord d'administration</h1>
 
       <!-- VOTES SECTION -->
       <div class="section">
-        <h2>Vote Results</h2>
+        <h2>Résultats des votes</h2>
         <div id="votesStats"></div>
-        <button class="btn" id="resetVotes" style="width:auto; background:#d32f2f; border-color:#d32f2f; margin-top:15px;">Reset All Votes</button>
+        <button class="btn" id="resetVotes" style="width:auto; background:#d32f2f; border-color:#d32f2f; margin-top:15px;">Réinitialiser tous les votes</button>
       </div>
 
       <!-- NOTES SECTION -->
       <div class="section">
-        <h2>Customer Notes</h2>
-        <p style="color:var(--muted); font-size:14px; margin:0 0 15px 0;">Total notes: <strong id="notesCount">0</strong></p>
+        <h2>Notes des clients</h2>
+        <p style="color:var(--muted); font-size:14px; margin:0 0 15px 0;">Nombre total de notes: <strong id="notesCount">0</strong></p>
         <div id="notesList" style="max-height:500px; overflow-y:auto;"></div>
       </div>
     </div>
@@ -143,7 +143,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js"></script>
 
   <script>
-    // Firebase Config
+    // Configuration Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyCRo5ZfLt1nCmCEXFwES65AkF-pJYhT8FI",
       authDomain: "touichia-votes.firebaseapp.com",
@@ -158,21 +158,21 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    const ADMIN_PASSWORD = "touichia2024"; // Change this!
+    const ADMIN_PASSWORD = "touichia2024"; // Changez ceci!
     const loginPanel = document.getElementById("loginPanel");
     const adminPanel = document.getElementById("adminPanel");
     const loginBtn = document.getElementById("loginBtn");
     const logoutBtn = document.getElementById("logoutBtn");
     const passwordInput = document.getElementById("adminPassword");
 
-    // LOGIN
+    // CONNEXION
     loginBtn.addEventListener("click", () => {
       if (passwordInput.value === ADMIN_PASSWORD) {
         loginPanel.style.display = "none";
         adminPanel.style.display = "block";
         loadData();
       } else {
-        alert("Incorrect password");
+        alert("Mot de passe incorrect");
         passwordInput.value = "";
       }
     });
@@ -181,14 +181,14 @@
       if (e.key === "Enter") loginBtn.click();
     });
 
-    // LOGOUT
+    // DÉCONNEXION
     logoutBtn.addEventListener("click", () => {
       loginPanel.style.display = "block";
       adminPanel.style.display = "none";
       passwordInput.value = "";
     });
 
-    // LOAD DATA
+    // CHARGER LES DONNÉES
     function loadData() {
       loadVotes();
       loadNotes();
@@ -227,16 +227,16 @@
           const content = document.createElement("div");
           content.className = "note-content";
           content.innerHTML = `
-            <strong>${escapeHtml(note.username || 'Anonymous')}</strong>
+            <strong>${escapeHtml(note.username || 'Anonyme')}</strong>
             <span>${escapeHtml(note.text)}</span>
-            <span style="font-size:11px; opacity:.6; margin-top:6px;">${new Date(note.timestamp).toLocaleString()}</span>
+            <span style="font-size:11px; opacity:.6; margin-top:6px;">${new Date(note.timestamp).toLocaleString('fr-FR')}</span>
           `;
           
           const deleteBtn = document.createElement("button");
           deleteBtn.className = "note-delete";
-          deleteBtn.textContent = "Delete";
+          deleteBtn.textContent = "Supprimer";
           deleteBtn.addEventListener("click", () => {
-            if (confirm("Delete this note?")) {
+            if (confirm("Supprimer cette note?")) {
               db.ref(`notes/${key}`).remove();
             }
           });
@@ -254,9 +254,9 @@
       return div.innerHTML;
     }
 
-    // RESET VOTES
+    // RÉINITIALISER LES VOTES
     document.getElementById("resetVotes").addEventListener("click", () => {
-      if (confirm("Reset ALL votes? This cannot be undone!")) {
+      if (confirm("Réinitialiser TOUS les votes? Ceci ne peut pas être annulé!")) {
         db.ref("votes").remove();
       }
     });
